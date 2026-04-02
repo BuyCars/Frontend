@@ -1,0 +1,28 @@
+.header {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 0;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-logo {
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.header-links {
+  display: flex;
+  gap: 24px;
+}
+
+.header-links a {
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+}

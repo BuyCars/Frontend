@@ -1,0 +1,60 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hero-section {
+  padding: 64px 24px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-content h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.hero-content p {
+  margin: 12px 0 0;
+  font-size: 1.125rem;
+  color: #cbd5e1;
+}
+
+.hero-buttons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-sell,
+.btn-buy {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}

@@ -1,0 +1,76 @@
+.features-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.features-section h2 {
+  margin: 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.feature-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eff6ff;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  margin: 0 0 8px;
+}
+
+.feature-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.cta-section {
+  border-radius: 20px;
+  padding: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.cta-section h3,
+.cta-section p {
+  margin: 0;
+}
+
+.cta-section p {
+  margin-top: 8px;
+  color: #475569;
+}
+
+.cta-buttons {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-sell {
+  background: #0f172a;
+  color: #fff;
+}
+
+.btn-buy {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
