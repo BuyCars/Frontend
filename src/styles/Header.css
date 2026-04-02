@@ -1,28 +1,110 @@
 .header {
-  border-bottom: 1px solid #e2e8f0;
-  padding: 16px 0;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
 }
 
-.header-nav {
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  align-items: center;
 }
 
-.header-logo {
-  font-weight: 700;
-  color: #0f172a;
-  text-decoration: none;
+.logo h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #000c51;
+  font-weight: bold;
 }
 
-.header-links {
+.nav-menu {
   display: flex;
-  gap: 24px;
+  gap: 30px;
+  flex: 1;
+  margin: 0 40px;
 }
 
-.header-links a {
+.nav-menu a {
   text-decoration: none;
-  color: #334155;
-  font-weight: 500;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #667eea;
+}
+
+.nav-favorites {
+  color: #e74c3c !important;
+  font-weight: 700;
+}
+
+.nav-favorites:hover {
+  color: #c0392b !important;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-login,
+.btn-signup {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-login {
+  background-color: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn-login:hover {
+  background-color: #f0f2ff;
+}
+
+.btn-signup {
+  background-color: #667eea;
+  color: white;
+}
+
+.btn-signup:hover {
+  background-color: #764ba2;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-menu {
+    margin: 0;
+    gap: 15px;
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-login,
+  .btn-signup {
+    flex: 1;
+  }
 }

@@ -4,7 +4,7 @@ const FeaturesSection = () => {
   return (
     <section className="features-section">
       <h2>Почему выбирают buyCars</h2>
-
+      
       <div className="features-grid">
         <div className="feature-card">
           <div className="feature-icon">✓</div>
