@@ -1,0 +1,138 @@
+export interface Car {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
+  brand?: string;
+  model?: string;
+  year?: number;
+  mileage?: number;
+  fuel?: string;
+  transmission?: string;
+  condition?: "new" | "used";
+}
+
+export const mockCars: Car[] = [
+  {
+    id: 1,
+    title: "BMW 3 Series",
+    brand: "BMW",
+    model: "3 Series",
+    price: 45000,
+    description: "Новый немецкий седан последнего поколения",
+    image: "../images/bmw-3-series.png",
+    category: "sedan",
+    year: 2024,
+    mileage: 500,
+    fuel: "Бензин",
+    transmission: "Автомат",
+    condition: "new",
+  },
+  {
+    id: 2,
+    title: "Mercedes-Benz C-Class",
+    brand: "Mercedes-Benz",
+    model: "C-Class",
+    price: 38000,
+    description: "Премиум седан с полным приводом",
+    image: "/images/mercedes-c-class.png",
+    category: "sedan",
+    year: 2022,
+    mileage: 32000,
+    fuel: "Дизель",
+    transmission: "Автомат",
+    condition: "used",
+  },
+  {
+    id: 3,
+    title: "Audi RS6",
+    brand: "Audi",
+    model: "RS6",
+    price: 115700,
+    description: "Спортивный универсал с мощным двигателем",
+    image: "/images/audi-a4.png",
+    category: "sedan",
+    year: 2026,
+    mileage: 15000,
+    fuel: "Бензин",
+    transmission: "Автомат",
+    condition: "used",
+  },
+  {
+    id: 4,
+    title: "Toyota Camry",
+    brand: "Toyota",
+    model: "Camry",
+    price: 28000,
+    description: "Надежный гибридный седан",
+    image: "/images/toyota-camry.png",
+    category: "sedan",
+    year: 2024,
+    mileage: 1000,
+    fuel: "Гибрид",
+    transmission: "Автомат",
+    condition: "new",
+  },
+  {
+    id: 5,
+    title: "Honda CR-V",
+    brand: "Honda",
+    model: "CR-V",
+    price: 32000,
+    description: "Комфортный кроссовер для семьи",
+    image: "/images/honda-crv.png",
+    category: "suv",
+    year: 2023,
+    mileage: 22000,
+    fuel: "Бензин",
+    transmission: "Автомат",
+    condition: "used",
+  },
+  {
+    id: 6,
+    title: "Volkswagen Golf",
+    brand: "Volkswagen",
+    model: "Golf",
+    price: 25000,
+    description: "Классический хэтчбек для города",
+    image: "/images/vw-golf.png",
+    category: "hatchback",
+    year: 2024,
+    mileage: 0,
+    fuel: "Бензин",
+    transmission: "Механика",
+    condition: "new",
+  },
+  {
+    id: 7,
+    title: "Ford Mustang",
+    brand: "Ford",
+    model: "Mustang",
+    price: 52000,
+    description: "Легендарный спортивный автомобиль",
+    image: "/images/ford-mustang.png",
+    category: "sports",
+    year: 2023,
+    mileage: 18000,
+    fuel: "Бензин",
+    transmission: "Автомат",
+    condition: "used",
+  },
+  {
+    id: 8,
+    title: "Tesla Model 3",
+    brand: "Tesla",
+    model: "Model 3",
+    price: 48000,
+    description: "Электрический технологичный седан",
+    image: "/images/tesla-model3.png",
+    category: "electric",
+    year: 2024,
+    mileage: 200,
+    fuel: "Электро",
+    transmission: "Автомат",
+    condition: "new",
+  },
+];
