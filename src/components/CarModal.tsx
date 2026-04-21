@@ -93,7 +93,7 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
           <h2>{displayName}</h2>
           {car.condition && (
             <span className={`condition-badge ${car.condition}`}>
-              {car.condition === "new" ? "🆕 Новый" : "🔄 Б/У"}
+              {car.condition === "new" ? "Новый" : "С пробегом"}
             </span>
           )}
         </div>
@@ -165,14 +165,14 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
                 className="btn-primary"
                 onClick={() => setShowContactForm(true)}
               >
-                📞 Связаться с продавцом
+                Связаться с продавцом
               </button>
               <button
                 className={`btn-favorite ${liked ? "liked" : ""}`}
                 onClick={handleLike}
                 title={liked ? "Удалить из избранного" : "Добавить в избранное"}
               >
-                {liked ? "❤️" : "🩶"}
+                {liked ? "♥" : "♡"}
           
               </button>
             </>

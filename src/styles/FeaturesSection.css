@@ -1,15 +1,16 @@
 .features-section {
   margin: 80px 0;
   padding: 50px;
-  background: linear-gradient(135deg, #f3f4f6 0%, #f9fafb 100%);
-  border-radius: 12px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
 }
 
 .features-section h2 {
   text-align: center;
   font-size: 2em;
   margin: 0 0 50px 0;
-  color: #333;
+  color: var(--color-text);
 }
 
 .features-grid {
@@ -20,64 +21,66 @@
 }
 
 .feature-card {
-  background: white;
+  background: var(--color-surface);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+  transition: border-color 0.2s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  border-color: #9ca3af;
 }
 
 .feature-icon {
-  font-size: 3em;
+  font-size: 0.85rem;
   margin-bottom: 15px;
   display: inline-block;
-  width: 60px;
-  height: 60px;
-  background-color: #f0f2ff;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: #f3f4f6;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #667eea;
-  font-weight: bold;
+  color: #111111;
+  font-weight: 700;
 }
 
 .feature-card h3 {
   margin: 15px 0 10px 0;
   font-size: 1.2em;
-  color: #333;
+  color: var(--color-text);
 }
 
 .feature-card p {
   margin: 0;
-  color: #666;
+  color: var(--color-text-muted);
   font-size: 0.95em;
   line-height: 1.5;
 }
 
 .cta-section {
-  background: white;
+  background: var(--color-surface);
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
 }
 
 .cta-section h3 {
   font-size: 1.8em;
   margin: 0 0 10px 0;
-  color: #333;
+  color: var(--color-text);
 }
 
 .cta-section p {
   margin: 0 0 30px 0;
-  color: #666;
+  color: var(--color-text-muted);
   font-size: 1.05em;
 }
 
@@ -89,7 +92,7 @@
 }
 
 .btn-sell {
-  background-color: #667eea;
+  background-color: var(--color-inverse);
   color: white;
   padding: 14px 32px;
   border: none;
@@ -101,15 +104,14 @@
 }
 
 .btn-sell:hover {
-  background-color: #764ba2;
-  transform: translateY(-2px);
+  background-color: #1f2937;
 }
 
 .btn-buy {
   background-color: transparent;
-  color: #667eea;
+  color: var(--color-text);
   padding: 14px 32px;
-  border: 2px solid #667eea;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   font-size: 1em;
   font-weight: 600;
@@ -118,9 +120,9 @@
 }
 
 .btn-buy:hover {
-  background-color: #f0f2ff;
-  border-color: #764ba2;
-  color: #764ba2;
+  background-color: var(--color-surface-alt);
+  border-color: #9ca3af;
+  color: #111111;
 }
 
 @media (max-width: 768px) {

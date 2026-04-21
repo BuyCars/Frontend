@@ -1,6 +1,6 @@
 .header {
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -19,7 +19,7 @@
 .logo h1 {
   margin: 0;
   font-size: 1.8em;
-  color: #000c51;
+  color: var(--color-inverse);
   font-weight: bold;
 }
 
@@ -32,23 +32,23 @@
 
 .nav-menu a {
   text-decoration: none;
-  color: #333;
+  color: var(--color-text);
   font-weight: 600;
   font-size: 0.95em;
   transition: color 0.3s ease;
 }
 
 .nav-menu a:hover {
-  color: #667eea;
+  color: #111111;
 }
 
 .nav-favorites {
-  color: #e74c3c !important;
-  font-weight: 700;
+  color: var(--color-text) !important;
+  font-weight: 600;
 }
 
 .nav-favorites:hover {
-  color: #c0392b !important;
+  color: #111111 !important;
 }
 
 .header-actions {
@@ -69,21 +69,21 @@
 
 .btn-login {
   background-color: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .btn-login:hover {
-  background-color: #f0f2ff;
+  background-color: var(--color-surface-alt);
 }
 
 .btn-signup {
-  background-color: #667eea;
+  background-color: var(--color-inverse);
   color: white;
 }
 
 .btn-signup:hover {
-  background-color: #764ba2;
+  background-color: var(--color-primary-dark);
 }
 
 @media (max-width: 768px) {

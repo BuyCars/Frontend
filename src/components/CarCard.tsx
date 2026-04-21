@@ -89,15 +89,7 @@ const CarCard = ({ car }: CarCardProps) => {
                 onClick={handleLike}
                 title={liked ? "Удалить из избранного" : "Добавить в избранное"}
               >
-                {liked ? "❤️" : "🩶"}
-              </button>
-
-              <button
-                className="btn-contact-small"
-                onClick={handleContact}
-                title="Связаться"
-              >
-                📞
+                {liked ? "♥" : "♡"}
               </button>
 
               <button

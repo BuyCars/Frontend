@@ -7,37 +7,37 @@ const FeaturesSection = () => {
       
       <div className="features-grid">
         <div className="feature-card">
-          <div className="feature-icon">✓</div>
+          <div className="feature-icon">01</div>
           <h3>Проверенные продавцы</h3>
           <p>Все автомобили проходят проверку перед размещением</p>
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon">💰</div>
+          <div className="feature-icon">02</div>
           <h3>Лучшие цены</h3>
           <p>Конкурентные предложения от частных лиц и дилеров</p>
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon">⚡</div>
+          <div className="feature-icon">03</div>
           <h3>Быстрая продажа</h3>
           <p>Реальные покупатели, готовые купить прямо сейчас</p>
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon">🔒</div>
+          <div className="feature-icon">04</div>
           <h3>Безопасность</h3>
           <p>Защита данных и безопасные платежи</p>
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon">📞</div>
+          <div className="feature-icon">05</div>
           <h3>Поддержка 24/7</h3>
           <p>Помощь на каждом этапе покупки/продажи</p>
         </div>
 
         <div className="feature-card">
-          <div className="feature-icon">🚗</div>
+          <div className="feature-icon">06</div>
           <h3>Доставка</h3>
           <p>Организуем доставку автомобиля до вас</p>
         </div>

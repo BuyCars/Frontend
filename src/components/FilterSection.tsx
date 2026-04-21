@@ -19,11 +19,11 @@ const FilterSection = ({ onFilter }: FilterProps) => {
 
   // Категории автомобилей (УРОВЕНЬ 2)
   const categories = [
-    { id: 'sedan', label: '🚗 Седан' },
-    { id: 'suv', label: '🚙 Внедорожник' },
-    { id: 'hatchback', label: '🚕 Хэтчбек' },
-    { id: 'sports', label: '⚡ Спорт' },
-    { id: 'electric', label: '🔋 Электро' }
+    { id: 'sedan', label: 'Седан' },
+    { id: 'suv', label: 'Внедорожник' },
+    { id: 'hatchback', label: 'Хэтчбек' },
+    { id: 'sports', label: 'Спорт' },
+    { id: 'electric', label: 'Электро' }
   ];
 
   const handleApplyFilter = () => {
@@ -51,7 +51,7 @@ const FilterSection = ({ onFilter }: FilterProps) => {
   return (
     <>
       <button className="btn-filter-fixed" onClick={toggleOpen} title="Фильтры">
-        ☰ Фильтр
+        Фильтры
       </button>
 
       {isOpen && <div className="filter-overlay" onClick={() => setIsOpen(false)}></div>}
