@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import '../styles/Favorites.css';
 import { getFavorites } from '../components/favorites';
 import CarCard from '../components/CarCard';
-import { mockCars, Car } from '../const/mockCars';
+import { mockCars } from '../const/mockCars';
+import type { Car } from '../const/mockCars';
 
 const Favorites = () => {
   const [favoritesCars, setFavoritesCars] = useState<Car[]>([]);

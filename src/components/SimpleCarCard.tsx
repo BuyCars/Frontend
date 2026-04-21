@@ -1,19 +1,7 @@
 import { useState } from "react";
 import "../styles/SimpleCarCard.css";
 import CarModal from "./CarModal";
-
-interface Car {
-  id: number;
-  brand: string;
-  model: string;
-  year: number;
-  price: number;
-  mileage: number;
-  image: string;
-  condition: "new" | "used";
-  fuel?: string;
-  transmission?: string;
-}
+import type { Car } from "../const/mockCars";
 
 interface SimpleCarCardProps {
   car: Car;
@@ -22,6 +10,8 @@ interface SimpleCarCardProps {
 const SimpleCarCard = ({ car }: SimpleCarCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState(false);
+
+  const displayName = car.brand && car.model ? `${car.brand} ${car.model}` : car.title;
 
 
   return (
@@ -34,7 +24,7 @@ const SimpleCarCard = ({ car }: SimpleCarCardProps) => {
         >
           <img
             src={car.image}
-            alt={`${car.brand} ${car.model}`}
+            alt={displayName}
             className="car-image-img"
           />
 
@@ -49,7 +39,7 @@ const SimpleCarCard = ({ car }: SimpleCarCardProps) => {
               setLiked(!liked);
             }}
           >
-            {liked ? "❤️" : "🤍"}
+            {liked ? "В избранном" : "В избранное"}
           </button>
 
         </div>
@@ -57,15 +47,15 @@ const SimpleCarCard = ({ car }: SimpleCarCardProps) => {
         <div className="car-details">
 
           <h3 className="car-title">
-            {car.brand} {car.model}
+            {displayName}
           </h3>
 
-          <p className="car-year">{car.year}</p>
+          {car.year !== undefined && <p className="car-year">{car.year}</p>}
 
           <div className="car-specs-row">
-            <span>🛣 {car.mileage.toLocaleString()} км</span>
-            {car.fuel && <span>⛽ {car.fuel}</span>}
-            {car.transmission && <span>⚙ {car.transmission}</span>}
+            {car.mileage !== undefined && <span>Пробег: {car.mileage.toLocaleString()} км</span>}
+            {car.fuel && <span>Топливо: {car.fuel}</span>}
+            {car.transmission && <span>КПП: {car.transmission}</span>}
           </div>
 
           <div className="car-price">

@@ -20,13 +20,26 @@ body {
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-bg: #f3f4f6;
+  --color-surface: #ffffff;
+  --color-surface-alt: #eceff2;
+  --color-text: #111111;
+  --color-text-muted: #6b7280;
+  --color-border: #d1d5db;
+  --color-primary: #1f2937;
+  --color-primary-dark: #000000;
+  --color-primary-soft: #e5e7eb;
+  --color-inverse: #0b0b0c;
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.12);
+
+  font-family: "Manrope", "Segoe UI", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light;
-  color: #333;
-  background-color: #f5f7fa;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -36,18 +49,19 @@ body {
 
 a {
   font-weight: 500;
-  color: #667eea;
+  color: var(--color-primary);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #764ba2;
+  color: var(--color-primary-dark);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background-color: #f5f7fa;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 #root {
@@ -67,14 +81,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #667eea;
+  background-color: var(--color-primary);
   color: white;
   cursor: pointer;
   transition: background-color 0.25s;
 }
 
 button:hover {
-  background-color: #764ba2;
+  background-color: var(--color-primary-dark);
 }
 
 button:active {
