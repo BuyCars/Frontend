@@ -31,6 +31,10 @@
 .btn-primary {
   background-color: var(--color-surface);
   color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   padding: 14px 32px;
   border: none;
   border-radius: 6px;
@@ -47,6 +51,10 @@
 .btn-secondary {
   background-color: transparent;
   color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   padding: 14px 32px;
   border: 2px solid white;
   border-radius: 6px;

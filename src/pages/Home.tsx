@@ -14,7 +14,9 @@ const Home = () => {
             <Link to="/catalog" className="btn-primary">
               Купить авто
             </Link>
-            <button className="btn-secondary">Продать авто</button>
+            <Link to="/sell" className="btn-secondary">
+              Продать авто
+            </Link>
           </div>
         </div>
       </section>

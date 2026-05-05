@@ -1,33 +1,22 @@
 import { useEffect, useState } from "react";
 import "../styles/CarModal.css";
 import { toggleFavorite, isFavorite } from "./favorites";
-
-interface Car {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  category: string;
-  brand?: string;
-  model?: string;
-  year?: number;
-  mileage?: number;
-  fuel?: string;
-  transmission?: string;
-  condition?: "new" | "used";
-}
+import type { Car } from "../const/mockCars";
 
 interface CarModalProps {
   car: Car | null;
   isOpen: boolean;
   onClose: () => void;
+  onDeleteCar?: (carId: number) => void;
 }
 
-const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
+const CarModal = ({ car, isOpen, onClose, onDeleteCar }: CarModalProps) => {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [imageSrc, setImageSrc] = useState("");
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
   const [liked, setLiked] = useState(false);
+
+
   const [contactForm, setContactForm] = useState({
     name: "",
     phone: "",
@@ -42,12 +31,36 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
   }, [car?.id]);
 
   useEffect(() => {
-    if (car?.image) {
-      setImageSrc(car.image);
-    } else {
-      setImageSrc("/images/no-image.jpg");
+    setActiveImageIndex(0);
+    setIsFullscreenOpen(false);
+    setShowContactForm(false);
+  }, [car?.id]);
+
+  useEffect(() => {
+    if (!isFullscreenOpen) {
+      return;
     }
-  }, [car]);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsFullscreenOpen(false);
+      }
+
+      if (event.key === "ArrowLeft") {
+        setActiveImageIndex((currentIndex) => Math.max(0, currentIndex - 1));
+      }
+
+      if (event.key === "ArrowRight") {
+        setActiveImageIndex((currentIndex) => Math.min(galleryImages.length - 1, currentIndex + 1));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFullscreenOpen]);
 
   if (!isOpen || !car) return null;
 
@@ -79,8 +92,33 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
     }
   };
 
+  const handleDelete = () => {
+    const confirmed = window.confirm(`Удалить объявление «${displayName}»?`);
+
+    if (confirmed) {
+      onDeleteCar?.(car.id);
+    }
+  };
+
   const displayName =
     car.brand && car.model ? `${car.brand} ${car.model}` : car.title;
+
+  const galleryImages =
+    car.images && car.images.length > 0
+      ? car.images
+      : car.image
+      ? [car.image]
+      : ["/images/no-image.jpg"];
+
+  const currentImage = galleryImages[activeImageIndex] || galleryImages[0] || "/images/no-image.jpg";
+
+  const showPreviousImage = () => {
+    setActiveImageIndex((currentIndex) => Math.max(0, currentIndex - 1));
+  };
+
+  const showNextImage = () => {
+    setActiveImageIndex((currentIndex) => Math.min(galleryImages.length - 1, currentIndex + 1));
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -100,12 +138,44 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
 
         <div className="modal-body">
           <div className="modal-image-section">
-            <img
-              src={imageSrc}
-              alt={displayName}
-              className="modal-car-image"
-              onError={() => setImageSrc("/images/no-image.jpg")}
-            />
+            <button
+              type="button"
+              className="modal-image-button"
+              onClick={() => setIsFullscreenOpen(true)}
+            >
+              <img
+                src={currentImage}
+                alt={displayName}
+                className="modal-car-image"
+                onError={(event) => {
+                  event.currentTarget.src = "/images/no-image.jpg";
+                }}
+              />
+              <span className="modal-fullscreen-hint">Открыть на весь экран</span>
+            </button>
+
+            {galleryImages.length > 1 && (
+              <div className="modal-thumbnails">
+                {galleryImages.map((image, index) => (
+                  <button
+                    key={`${car.id}-${index}`}
+                    className={`thumbnail-button ${index === activeImageIndex ? "active" : ""}`}
+                    type="button"
+                    onClick={() => setActiveImageIndex(index)}
+                    aria-label={`Фото ${index + 1}`}
+                  >
+                    <img
+                      src={image}
+                      alt={`${displayName} ${index + 1}`}
+                      className="modal-thumbnail-image"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = "/images/no-image.jpg";
+                      }}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="modal-details">
@@ -161,20 +231,26 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
         <div className="modal-actions">
           {!showContactForm ? (
             <>
-              <button
-                className="btn-primary"
-                onClick={() => setShowContactForm(true)}
-              >
-                Связаться с продавцом
-              </button>
-              <button
-                className={`btn-favorite ${liked ? "liked" : ""}`}
-                onClick={handleLike}
-                title={liked ? "Удалить из избранного" : "Добавить в избранное"}
-              >
-                {liked ? "♥" : "♡"}
-          
-              </button>
+              <div className="modal-actions-left">
+                <button
+                  className="btn-primary"
+                  onClick={() => setShowContactForm(true)}
+                >
+                  Связаться с продавцом
+                </button>
+                <button
+                  className={`btn-favorite ${liked ? "liked" : ""}`}
+                  onClick={handleLike}
+                  title={liked ? "Удалить из избранного" : "Добавить в избранное"}
+                >
+                  {liked ? "♥" : "♡"}
+                </button>
+              </div>
+              {car.isUserCreated && onDeleteCar && (
+                <button className="btn-delete" onClick={handleDelete}>
+                  Удалить
+                </button>
+              )}
             </>
           ) : (
             <div className="contact-form">
@@ -240,6 +316,44 @@ const CarModal = ({ car, isOpen, onClose }: CarModalProps) => {
           )}
         </div>
       </div>
+
+      {isFullscreenOpen && (
+        <div className="fullscreen-overlay" onClick={() => setIsFullscreenOpen(false)}>
+          <div className="fullscreen-content" onClick={(event) => event.stopPropagation()}>
+            <button className="fullscreen-close" type="button" onClick={() => setIsFullscreenOpen(false)}>
+              ×
+            </button>
+
+            <img
+              src={currentImage}
+              alt={displayName}
+              className="fullscreen-image"
+              onError={(event) => {
+                event.currentTarget.src = "/images/no-image.jpg";
+              }}
+            />
+
+            {galleryImages.length > 1 && (
+              <div className="fullscreen-controls">
+                <button type="button" className="fullscreen-control" onClick={showPreviousImage} disabled={activeImageIndex === 0}>
+                  ←
+                </button>
+                <span>
+                  {activeImageIndex + 1} / {galleryImages.length}
+                </span>
+                <button
+                  type="button"
+                  className="fullscreen-control"
+                  onClick={showNextImage}
+                  disabled={activeImageIndex === galleryImages.length - 1}
+                >
+                  →
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

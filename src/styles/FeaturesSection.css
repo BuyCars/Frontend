@@ -94,6 +94,10 @@
 .btn-sell {
   background-color: var(--color-inverse);
   color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   padding: 14px 32px;
   border: none;
   border-radius: 6px;
@@ -110,6 +114,10 @@
 .btn-buy {
   background-color: transparent;
   color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   padding: 14px 32px;
   border: 1px solid var(--color-border);
   border-radius: 6px;
