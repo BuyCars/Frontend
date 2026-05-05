@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import "../styles/CarCatalog.css";
 import CarCard from "./CarCard";
-import { mockCars } from "../const/mockCars";
 import type { Car } from "../const/mockCars";
 
 interface CarCatalogProps {
+  cars: Car[];
+  onDeleteCar?: (carId: number) => void;
   searchTerm?: string;
   minPrice?: number | "";
   maxPrice?: number | "";
@@ -12,13 +13,13 @@ interface CarCatalogProps {
 }
 
 const CarCatalog = ({
+  cars,
+  onDeleteCar,
   searchTerm = "",
   minPrice = "",
   maxPrice = "",
   category = "",
 }: CarCatalogProps) => {
-  const [cars] = useState<Car[]>(mockCars);
-
   const filteredCars = useMemo(() => {
     const term = searchTerm.toLowerCase().trim();
 
@@ -61,7 +62,7 @@ const CarCatalog = ({
       ) : (
         <div className="cars-grid">
           {filteredCars.map((car) => (
-            <CarCard key={car.id} car={car} />
+            <CarCard key={car.id} car={car} onDeleteCar={onDeleteCar} />
           ))}
         </div>
       )}

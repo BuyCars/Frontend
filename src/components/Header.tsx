@@ -11,6 +11,7 @@ const Header = () => {
         <nav className="nav-menu">
           <Link to="/">Главная</Link>
           <Link to="/catalog">Каталог</Link>
+          <Link to="/sell">Продать</Link>
           <Link to="/about">О нас</Link>
           <a href="#contact">Контакты</a>
           <Link to="/favorites" className="nav-favorites">Избранное</Link>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/FeaturesSection.css';
 
 const FeaturesSection = () => {
@@ -47,12 +48,12 @@ const FeaturesSection = () => {
         <h3>Готовы начать?</h3>
         <p>Продайте авто за считанные минуты или найдите свой идеальный автомобиль</p>
         <div className="cta-buttons">
-          <button className="btn-sell">Продать авто</button>
-          <button className="btn-buy">Купить авто</button>
+          <Link to="/sell" className="btn-sell">Продать авто</Link>
+          <Link to="/catalog" className="btn-buy">Купить авто</Link>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default FeaturesSection;
