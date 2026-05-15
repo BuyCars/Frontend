@@ -2,28 +2,14 @@ import { useState, useEffect } from "react";
 import "../styles/CarCard.css";
 import CarModal from "./CarModal";
 import { toggleFavorite, isFavorite } from "./favorites";
-
-interface Car {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  category: string;
-  brand?: string;
-  model?: string;
-  year?: number;
-  mileage?: number;
-  fuel?: string;
-  transmission?: string;
-  condition?: "new" | "used";
-}
+import type { Car } from "../const/mockCars";
 
 interface CarCardProps {
   car: Car;
+  onDeleteCar?: (carId: number) => void;
 }
 
-const CarCard = ({ car }: CarCardProps) => {
+const CarCard = ({ car, onDeleteCar }: CarCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -34,13 +20,6 @@ const CarCard = ({ car }: CarCardProps) => {
   const handleLike = () => {
     const state = toggleFavorite(car.id);
     setLiked(state);
-  };
-
-  const handleContact = () => {
-    const phone = prompt("Введите ваш номер телефона:");
-    if (phone) {
-      alert(`Мы свяжемся с вами: ${phone}`);
-    }
   };
 
   const displayName =
@@ -89,15 +68,7 @@ const CarCard = ({ car }: CarCardProps) => {
                 onClick={handleLike}
                 title={liked ? "Удалить из избранного" : "Добавить в избранное"}
               >
-                {liked ? "❤️" : "🩶"}
-              </button>
-
-              <button
-                className="btn-contact-small"
-                onClick={handleContact}
-                title="Связаться"
-              >
-                📞
+                {liked ? "♥" : "♡"}
               </button>
 
               <button
@@ -115,6 +86,7 @@ const CarCard = ({ car }: CarCardProps) => {
         car={car}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onDeleteCar={onDeleteCar}
       />
     </>
   );

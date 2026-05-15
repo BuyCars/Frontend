@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Favorites.css';
 import { getFavorites } from '../components/favorites';
 import CarCard from '../components/CarCard';
-import { mockCars, Car } from '../const/mockCars';
+import type { Car } from '../const/mockCars';
 
-const Favorites = () => {
+interface FavoritesProps {
+  cars: Car[];
+  onDeleteCar?: (carId: number) => void;
+}
+
+const Favorites = ({ cars, onDeleteCar }: FavoritesProps) => {
   const [favoritesCars, setFavoritesCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +25,7 @@ const Favorites = () => {
       }
 
       try {
-        const filtered = mockCars.filter(car => favoriteIds.includes(car.id));
+        const filtered = cars.filter(car => favoriteIds.includes(car.id));
         setFavoritesCars(filtered);
       } catch (error) {
         console.error('Ошибка загрузки избранного:', error);
@@ -29,7 +35,7 @@ const Favorites = () => {
     };
 
     loadFavorites();
-  }, []);
+  }, [cars]);
 
   return (
     <div className="favorites-page">
@@ -41,12 +47,12 @@ const Favorites = () => {
         ) : favoritesCars.length === 0 ? (
           <div className="empty-state">
             <p>У вас нет избранных автомобилей</p>
-            <a href="/catalog" className="btn-browse">Перейти в каталог</a>
+            <Link to="/catalog" className="btn-browse">Перейти в каталог</Link>
           </div>
         ) : (
           <div className="favorites-grid">
             {favoritesCars.map((car) => (
-              <CarCard key={car.id} car={car} />
+              <CarCard key={car.id} car={car} onDeleteCar={onDeleteCar} />
             ))}
           </div>
         )}

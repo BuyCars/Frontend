@@ -4,6 +4,7 @@ export interface Car {
   price: number;
   description: string;
   image: string;
+  images?: string[];
   category: string;
   brand?: string;
   model?: string;
@@ -12,6 +13,7 @@ export interface Car {
   fuel?: string;
   transmission?: string;
   condition?: "new" | "used";
+  isUserCreated?: boolean;
 }
 
 export const mockCars: Car[] = [

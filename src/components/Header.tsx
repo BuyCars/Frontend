@@ -11,9 +11,10 @@ const Header = () => {
         <nav className="nav-menu">
           <Link to="/">Главная</Link>
           <Link to="/catalog">Каталог</Link>
-          <a href="#about">О нас</a>
+          <Link to="/sell">Продать</Link>
+          <Link to="/about">О нас</Link>
           <a href="#contact">Контакты</a>
-          <Link to="/favorites" className="nav-favorites">❤️ Избранные</Link>
+          <Link to="/favorites" className="nav-favorites">Избранное</Link>
         </nav>
         <div className="header-actions">
           <button className="btn-login">Вход</button>
