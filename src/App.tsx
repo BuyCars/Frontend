@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -7,6 +8,7 @@ import Catalog from './pages/Catalog';
 import Favorites from './pages/Favorites';
 import About from './pages/About';
 import SellCar from './pages/SellCar';
+import AdminPanel from './pages/AdminPanel';
 import { mockCars } from './const/mockCars';
 import type { Car } from './const/mockCars';
 import './App.css';
@@ -65,19 +67,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app">
-        <Header />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog cars={cars} onDeleteCar={handleDeleteCar} />} />
-            <Route path="/favorites" element={<Favorites cars={cars} onDeleteCar={handleDeleteCar} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/sell" element={<SellCar onAddCar={handleAddCar} />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AuthProvider>
+        <div className="app">
+          <Header />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalog" element={<Catalog cars={cars} onDeleteCar={handleDeleteCar} />} />
+              <Route path="/favorites" element={<Favorites cars={cars} onDeleteCar={handleDeleteCar} />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/sell" element={<SellCar onAddCar={handleAddCar} />} />
+              <Route path="/admin" element={<AdminPanel />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
