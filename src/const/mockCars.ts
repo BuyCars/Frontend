@@ -14,6 +14,7 @@ export interface Car {
   transmission?: string;
   condition?: "new" | "used";
   isUserCreated?: boolean;
+  userId?: number;
 }
 
 export const mockCars: Car[] = [

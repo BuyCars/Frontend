@@ -2,7 +2,7 @@
 const API_BASE = 'http://localhost:5000/api';
 
 // Set to true to test without a real backend
-const MOCK_MODE = true;
+const MOCK_MODE = false;
 
 export interface LoginResponse {
   status: boolean;
