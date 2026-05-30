@@ -8,9 +8,10 @@ import type { Car } from '../const/mockCars';
 interface CatalogProps {
   cars: Car[];
   onDeleteCar?: (carId: number) => void;
+  onEditCar?: (carId: number, updates: Partial<Omit<Car, 'id'>>) => void;
 }
 
-const Catalog = ({ cars, onDeleteCar }: CatalogProps) => {
+const Catalog = ({ cars, onDeleteCar, onEditCar }: CatalogProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(1000000);
@@ -32,11 +33,12 @@ const Catalog = ({ cars, onDeleteCar }: CatalogProps) => {
     <div className="catalog-page">
       <FilterSection onFilter={handleFilter} />
       <BrandsSection />
-      <CarCatalog 
+      <CarCatalog
         cars={cars}
         onDeleteCar={onDeleteCar}
-        searchTerm={searchTerm} 
-        minPrice={priceMin} 
+        onEditCar={onEditCar}
+        searchTerm={searchTerm}
+        minPrice={priceMin}
         maxPrice={priceMax}
         category={category}
       />

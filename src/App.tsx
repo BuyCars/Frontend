@@ -49,6 +49,10 @@ function App() {
     });
   };
 
+  const handleEditCar = (carId: number, updates: Partial<Omit<Car, 'id'>>) => {
+    setCars((prev) => prev.map((car) => (car.id === carId ? { ...car, ...updates } : car)));
+  };
+
   const handleDeleteCar = (carId: number) => {
     setCars((prevCars) => prevCars.filter((car) => car.id !== carId));
 
@@ -73,11 +77,11 @@ function App() {
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/catalog" element={<Catalog cars={cars} onDeleteCar={handleDeleteCar} />} />
+              <Route path="/catalog" element={<Catalog cars={cars} onDeleteCar={handleDeleteCar} onEditCar={handleEditCar} />} />
               <Route path="/favorites" element={<Favorites cars={cars} onDeleteCar={handleDeleteCar} />} />
               <Route path="/about" element={<About />} />
               <Route path="/sell" element={<SellCar onAddCar={handleAddCar} />} />
-              <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/admin" element={<AdminPanel cars={cars} onDeleteCar={handleDeleteCar} onEditCar={handleEditCar} />} />
             </Routes>
           </main>
           <Footer />

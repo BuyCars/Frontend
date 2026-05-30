@@ -1,22 +1,25 @@
-export const getFavorites = (): number[] => {
-  const data = localStorage.getItem("favorites");
-  return data ? JSON.parse(data) : [];
+const getKey = (userId?: number) =>
+  userId ? `favorites_${userId}` : 'favorites_guest';
+
+export const getFavorites = (userId?: number): number[] => {
+  try {
+    const data = localStorage.getItem(getKey(userId));
+    return data ? (JSON.parse(data) as number[]) : [];
+  } catch {
+    return [];
+  }
 };
 
-export const toggleFavorite = (id: number) => {
-  const favorites = getFavorites();
-
+export const toggleFavorite = (id: number, userId?: number): boolean => {
+  const favorites = getFavorites(userId);
   if (favorites.includes(id)) {
-    const updated = favorites.filter(f => f !== id);
-    localStorage.setItem("favorites", JSON.stringify(updated));
+    localStorage.setItem(getKey(userId), JSON.stringify(favorites.filter((f) => f !== id)));
     return false;
   } else {
-    favorites.push(id);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem(getKey(userId), JSON.stringify([...favorites, id]));
     return true;
   }
 };
 
-export const isFavorite = (id: number) => {
-  return getFavorites().includes(id);
-};
+export const isFavorite = (id: number, userId?: number): boolean =>
+  getFavorites(userId).includes(id);

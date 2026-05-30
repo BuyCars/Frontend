@@ -2,23 +2,27 @@ import { useState, useEffect } from "react";
 import "../styles/CarCard.css";
 import CarModal from "./CarModal";
 import { toggleFavorite, isFavorite } from "./favorites";
+import { useAuth } from "../context/AuthContext";
 import type { Car } from "../const/mockCars";
 
 interface CarCardProps {
   car: Car;
   onDeleteCar?: (carId: number) => void;
+  onEditCar?: (carId: number, updates: Partial<Omit<Car, 'id'>>) => void;
 }
 
-const CarCard = ({ car, onDeleteCar }: CarCardProps) => {
+const CarCard = ({ car, onDeleteCar, onEditCar }: CarCardProps) => {
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    setLiked(isFavorite(car.id));
-  }, [car.id]);
+    setLiked(isFavorite(car.id, user?.id));
+  }, [car.id, user?.id]);
 
   const handleLike = () => {
-    const state = toggleFavorite(car.id);
+    if (!user) return;
+    const state = toggleFavorite(car.id, user.id);
     setLiked(state);
   };
 
@@ -64,9 +68,10 @@ const CarCard = ({ car, onDeleteCar }: CarCardProps) => {
 
             <div className="car-actions">
               <button
-                className={`btn-favorite ${liked ? "liked" : ""}`}
+                className={`btn-favorite ${liked ? "liked" : ""} ${!user ? "btn-favorite--disabled" : ""}`}
                 onClick={handleLike}
-                title={liked ? "Удалить из избранного" : "Добавить в избранное"}
+                title={user ? (liked ? "Удалить из избранного" : "Добавить в избранное") : "Войдите чтобы добавить в избранное"}
+                disabled={!user}
               >
                 {liked ? "♥" : "♡"}
               </button>
@@ -87,6 +92,7 @@ const CarCard = ({ car, onDeleteCar }: CarCardProps) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onDeleteCar={onDeleteCar}
+        onEditCar={onEditCar}
       />
     </>
   );
