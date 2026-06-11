@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import type { Car } from '../const/mockCars';
 import '../styles/SellCar.css';
 
@@ -52,7 +53,13 @@ const toDataUrl = (file: File) =>
   });
 
 const SellCar = ({ onAddCar }: SellCarProps) => {
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) navigate('/');
+  }, [user, navigate]);
+
   const [form, setForm] = useState<SellCarForm>(initialForm);
   const [files, setFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
@@ -145,6 +152,7 @@ const SellCar = ({ onAddCar }: SellCarProps) => {
         transmission: form.transmission,
         condition: form.condition,
         isUserCreated: true,
+        userId: user?.id,
       });
 
       navigate('/catalog');

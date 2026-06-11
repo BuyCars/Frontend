@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/CarModal.css";
 import { toggleFavorite, isFavorite } from "./favorites";
+import { useAuth } from "../context/AuthContext";
 import type { Car } from "../const/mockCars";
 
 interface CarModalProps {
@@ -8,9 +9,11 @@ interface CarModalProps {
   isOpen: boolean;
   onClose: () => void;
   onDeleteCar?: (carId: number) => void;
+  onEditCar?: (carId: number, updates: Partial<Omit<Car, 'id'>>) => void;
 }
 
-const CarModal = ({ car, isOpen, onClose, onDeleteCar }: CarModalProps) => {
+const CarModal = ({ car, isOpen, onClose, onDeleteCar, onEditCar }: CarModalProps) => {
+  const { user } = useAuth();
   const [showContactForm, setShowContactForm] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
@@ -26,9 +29,9 @@ const CarModal = ({ car, isOpen, onClose, onDeleteCar }: CarModalProps) => {
 
   useEffect(() => {
     if (car) {
-      setLiked(isFavorite(car.id));
+      setLiked(isFavorite(car.id, user?.id));
     }
-  }, [car?.id]);
+  }, [car?.id, user?.id]);
 
   useEffect(() => {
     setActiveImageIndex(0);
@@ -86,11 +89,15 @@ const CarModal = ({ car, isOpen, onClose, onDeleteCar }: CarModalProps) => {
   };
 
   const handleLike = () => {
-    if (car) {
-      const state = toggleFavorite(car.id);
+    if (car && user) {
+      const state = toggleFavorite(car.id, user.id);
       setLiked(state);
     }
   };
+
+  const canDelete = car && onDeleteCar && (
+    (car.isUserCreated && car.userId === user?.id) || user?.role === 'admin'
+  );
 
   const handleDelete = () => {
     const confirmed = window.confirm(`Удалить объявление «${displayName}»?`);
@@ -246,7 +253,7 @@ const CarModal = ({ car, isOpen, onClose, onDeleteCar }: CarModalProps) => {
                   {liked ? "♥" : "♡"}
                 </button>
               </div>
-              {car.isUserCreated && onDeleteCar && (
+              {canDelete && (
                 <button className="btn-delete" onClick={handleDelete}>
                   Удалить
                 </button>

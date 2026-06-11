@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Favorites.css';
 import { getFavorites } from '../components/favorites';
+import { useAuth } from '../context/AuthContext';
 import CarCard from '../components/CarCard';
 import type { Car } from '../const/mockCars';
 
@@ -11,37 +12,29 @@ interface FavoritesProps {
 }
 
 const Favorites = ({ cars, onDeleteCar }: FavoritesProps) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [favoritesCars, setFavoritesCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadFavorites = async () => {
-      const favoriteIds = getFavorites();
-      
-      if (favoriteIds.length === 0) {
-        setFavoritesCars([]);
-        setLoading(false);
-        return;
-      }
+    if (!user) {
+      navigate('/');
+      return;
+    }
 
-      try {
-        const filtered = cars.filter(car => favoriteIds.includes(car.id));
-        setFavoritesCars(filtered);
-      } catch (error) {
-        console.error('Ошибка загрузки избранного:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const favoriteIds = getFavorites(user.id);
+    setFavoritesCars(cars.filter((car) => favoriteIds.includes(car.id)));
+    setLoading(false);
+  }, [cars, user, navigate]);
 
-    loadFavorites();
-  }, [cars]);
+  if (!user) return null;
 
   return (
     <div className="favorites-page">
       <div className="favorites-container">
         <h1>Мои избранные автомобили</h1>
-        
+
         {loading ? (
           <div className="loading">Загрузка...</div>
         ) : favoritesCars.length === 0 ? (

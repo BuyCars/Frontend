@@ -6,6 +6,7 @@ import type { Car } from "../const/mockCars";
 interface CarCatalogProps {
   cars: Car[];
   onDeleteCar?: (carId: number) => void;
+  onEditCar?: (carId: number, updates: Partial<Omit<Car, 'id'>>) => void;
   searchTerm?: string;
   minPrice?: number | "";
   maxPrice?: number | "";
@@ -15,6 +16,7 @@ interface CarCatalogProps {
 const CarCatalog = ({
   cars,
   onDeleteCar,
+  onEditCar,
   searchTerm = "",
   minPrice = "",
   maxPrice = "",
@@ -62,7 +64,7 @@ const CarCatalog = ({
       ) : (
         <div className="cars-grid">
           {filteredCars.map((car) => (
-            <CarCard key={car.id} car={car} onDeleteCar={onDeleteCar} />
+            <CarCard key={car.id} car={car} onDeleteCar={onDeleteCar} onEditCar={onEditCar} />
           ))}
         </div>
       )}
