@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
+import { getAvatar } from '../utils/avatar';
 import '../styles/Header.css';
 
 type ModalType = 'login' | 'register' | null;
@@ -10,12 +11,33 @@ type ModalType = 'login' | 'register' | null;
 const Header = () => {
   const { user, logout } = useAuth();
   const [modal, setModal] = useState<ModalType>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setAvatarUrl(getAvatar(user.id));
+    } else {
+      setAvatarUrl(null);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const onAvatarUpdated = () => {
+      if (user) setAvatarUrl(getAvatar(user.id));
+    };
+    window.addEventListener('avatar-updated', onAvatarUpdated);
+    return () => window.removeEventListener('avatar-updated', onAvatarUpdated);
+  }, [user]);
 
   const handleLogout = async () => {
     await logout();
     navigate('/');
   };
+
+  const initials = user
+    ? user.userName[0].toUpperCase()
+    : '';
 
   return (
     <>
@@ -38,10 +60,17 @@ const Header = () => {
           <div className="header-actions">
             {user ? (
               <>
-                <span className="user-greeting">
-                  {user.userName}
+                <Link to="/profile" className="user-greeting">
+                  <span className="header-avatar">
+                    {avatarUrl ? (
+                      <img src={avatarUrl} alt={user.userName} className="header-avatar-img" />
+                    ) : (
+                      <span className="header-avatar-initials">{initials}</span>
+                    )}
+                  </span>
+                  <span className="header-username">{user.userName}</span>
                   {user.role === 'admin' && <span className="role-badge">Админ</span>}
-                </span>
+                </Link>
                 <button className="btn-login" onClick={handleLogout}>
                   Выйти
                 </button>

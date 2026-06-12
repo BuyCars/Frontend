@@ -9,6 +9,7 @@ import Favorites from './pages/Favorites';
 import About from './pages/About';
 import SellCar from './pages/SellCar';
 import AdminPanel from './pages/AdminPanel';
+import Profile from './pages/Profile';
 import { mockCars } from './const/mockCars';
 import type { Car } from './const/mockCars';
 import './App.css';
@@ -82,6 +83,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/sell" element={<SellCar onAddCar={handleAddCar} />} />
               <Route path="/admin" element={<AdminPanel cars={cars} onDeleteCar={handleDeleteCar} onEditCar={handleEditCar} />} />
+              <Route path="/profile" element={<Profile cars={cars} onDeleteCar={handleDeleteCar} onEditCar={handleEditCar} />} />
             </Routes>
           </main>
           <Footer />
