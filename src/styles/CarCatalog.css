@@ -1,0 +1,127 @@
+.car-catalog {
+  margin-bottom: 60px;
+}
+
+.catalog-header {
+  margin-bottom: 30px;
+}
+
+.catalog-header h2 {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: var(--color-text);
+}
+
+.catalog-header p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95em;
+}
+
+.catalog-count {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Loading, Error, Empty States (УРОВЕНЬ 2) */
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 40px 20px;
+  text-align: center;
+  background: var(--color-surface-alt);
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  font-size: 1.2em;
+  color: var(--color-text-muted);
+}
+
+.state-container.error {
+  background: var(--color-surface-alt);
+  color: #1f2937;
+  border: 2px solid #cbd5e1;
+}
+
+.state-container.empty {
+  color: #334155;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+}
+
+/* Loading Spinner (УРОВЕНЬ 2) */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f0f0f0;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Grid - адаптивный (УРОВЕНЬ 1) */
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* Адаптив для планшетов */
+@media (max-width: 992px) {
+  .cars-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .catalog-header h2 {
+    font-size: 1.7em;
+  }
+}
+
+/* Адаптив для телефонов */
+@media (max-width: 768px) {
+  .cars-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .catalog-header h2 {
+    font-size: 1.5em;
+  }
+
+  .catalog-header p {
+    font-size: 0.9em;
+  }
+
+  .state-container {
+    min-height: 250px;
+    padding: 30px 15px;
+    font-size: 1em;
+  }
+}
+
+/* Маленькие экраны */
+@media (max-width: 480px) {
+  .cars-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .catalog-header h2 {
+    font-size: 1.3em;
+  }
+
+  .state-container {
+    min-height: 200px;
+    padding: 20px 10px;
+  }
+}

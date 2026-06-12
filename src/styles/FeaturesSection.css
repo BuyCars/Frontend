@@ -1,0 +1,167 @@
+.features-section {
+  margin: 80px 0;
+  padding: 50px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.features-section h2 {
+  text-align: center;
+  font-size: 2em;
+  margin: 0 0 50px 0;
+  color: var(--color-text);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: #9ca3af;
+}
+
+.feature-icon {
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  background-color: #f3f4f6;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111111;
+  font-weight: 700;
+}
+
+.feature-card h3 {
+  margin: 15px 0 10px 0;
+  font-size: 1.2em;
+  color: var(--color-text);
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.cta-section {
+  background: var(--color-surface);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.cta-section h3 {
+  font-size: 1.8em;
+  margin: 0 0 10px 0;
+  color: var(--color-text);
+}
+
+.cta-section p {
+  margin: 0 0 30px 0;
+  color: var(--color-text-muted);
+  font-size: 1.05em;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-sell {
+  background-color: var(--color-inverse);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-sell:hover {
+  background-color: #1f2937;
+}
+
+.btn-buy {
+  background-color: transparent;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+  background-color: var(--color-surface-alt);
+  border-color: #9ca3af;
+  color: #111111;
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    padding: 30px 20px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .features-section h2 {
+    font-size: 1.6em;
+    margin-bottom: 30px;
+  }
+
+  .cta-section {
+    padding: 30px 20px;
+  }
+
+  .cta-section h3 {
+    font-size: 1.4em;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .btn-sell,
+  .btn-buy {
+    width: 100%;
+  }
+}
