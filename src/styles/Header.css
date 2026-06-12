@@ -64,6 +64,45 @@
   font-weight: 600;
   font-size: 0.95em;
   color: var(--color-text);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.user-greeting:hover {
+  opacity: 0.75;
+}
+
+/* Mini avatar in header */
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.header-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-avatar-initials {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.header-username {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .role-badge {
